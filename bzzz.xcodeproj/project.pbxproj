@@ -8,15 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		2F4B61AD2FF15E4500CEFEB3 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 2F4B61AC2FF15E4500CEFEB3 /* KeyboardShortcuts */; };
+		2F4B61B82FF1731800CEFEB3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2F4B61B72FF1731800CEFEB3 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2F0F48462FF06109000BE3E5 /* bzzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bzzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F4B61B72FF1731800CEFEB3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2F4B61B22FF16F4700CEFEB3 /* Exceptions for "bzzz" folder in "bzzz" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2F0F48452FF06109000BE3E5 /* bzzz */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2F0F48482FF06109000BE3E5 /* bzzz */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2F4B61B22FF16F4700CEFEB3 /* Exceptions for "bzzz" folder in "bzzz" target */,
+			);
 			path = bzzz;
 			sourceTree = "<group>";
 		};
@@ -37,6 +52,7 @@
 		2F0F483D2FF06109000BE3E5 = {
 			isa = PBXGroup;
 			children = (
+				2F4B61B72FF1731800CEFEB3 /* README.md */,
 				2F0F48482FF06109000BE3E5 /* bzzz */,
 				2F0F48472FF06109000BE3E5 /* Products */,
 			);
@@ -118,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F4B61B82FF1731800CEFEB3 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +281,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bzzz/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -294,6 +313,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bzzz/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -11,15 +11,25 @@ import SwiftUI
 struct bzzzApp: App {
     @StateObject private var appState = AppState()
     
-    var body: some Scene {
+    private var menuIcon: Image {
+        let name = appState.isMuted ? "microphone.slash.circle.fill" : "microphone.circle.fill"
+        let colorConfig = NSImage.SymbolConfiguration(hierarchicalColor: appState.isMuted ? .systemRed : .systemBlue)
+        let sizeConfig = NSImage.SymbolConfiguration(pointSize: 20, weight: .regular)
+            .applying(colorConfig)
         
-        MenuBarExtra(
-            "bzz",
-            systemImage: appState.isMuted ? "mic.slash.fill" : "microphone.circle.fill"
-        ) {
+        let img = NSImage(systemSymbolName: name, accessibilityDescription: nil)!.withSymbolConfiguration(sizeConfig)!
+        img.isTemplate = false
+        
+        return Image(nsImage: img)
+    }
+    
+    var body: some Scene {
+        MenuBarExtra{
             ContentView(appState: appState)
-                .frame(width: 200, height: 100)
+                .frame(width: 250, height: 150)
 
+        } label: {
+            menuIcon
         }
         .menuBarExtraStyle(.window)
     }

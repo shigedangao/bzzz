@@ -11,6 +11,7 @@ enum MicError: Error {
     case GainErrorMuted(OSStatus)
 }
 
+// MicHandler is a class which handle operation on the microphone
 class MicHandler {
     var deviceId: AudioObjectID;
     var micSupported = false
@@ -18,8 +19,10 @@ class MicHandler {
     var scalarPropAddr: AudioObjectPropertyAddress
     var isMuted = false
     
-    // Create a new MicHandler by getting the property of the device
     init() {
+        // Get the default device id for the microphone
+        // /!\ Note that if an airpod is being plugged and being used as a microphone this would probably not work
+        //     It'd required to get a list of device which for my personal use case is not needed yet
         self.deviceId = AudioObjectID(kAudioObjectUnknown)
         
         var size = UInt32(MemoryLayout<AudioObjectID>.size)
@@ -29,6 +32,7 @@ class MicHandler {
             mElement: kAudioObjectPropertyElementMain
         )
         
+        // Get the property of the device in the deviceId pointer
         AudioObjectGetPropertyData(
             AudioObjectID(kAudioObjectSystemObject),
             &addr,
@@ -57,10 +61,13 @@ class MicHandler {
             self.micSupported = true
         }
         
-        self.is_muted()
+        self.initMuteStatus()
     }
     
-    func toggle_muted() throws {
+    // Toggle the microphone
+    // 1. Either by using the mute property (depends if the device supports it)
+    // 2. By controlling the gain...
+    func toggleMuted() throws -> Bool {
         if self.micSupported {
             // mutedFlag is either a 1 or 0 as the API only support numerics values
             var mutedFlag = if self.isMuted {
@@ -74,9 +81,9 @@ class MicHandler {
                 throw MicError.MicErrorMuted(status)
             }
                         
-            self.set_muted_flag(flag: mutedFlag)
+            self.setMutedFlag(flag: mutedFlag)
                         
-            return
+            return self.isMuted
         }
         
         
@@ -86,10 +93,13 @@ class MicHandler {
             throw MicError.GainErrorMuted(status)
         }
                 
-        self.set_muted_flag(flag: Int(gainedFlag))
+        self.setMutedFlag(flag: Int(gainedFlag))
+        
+        return self.isMuted
     }
     
-    func set_muted_flag(flag: Int) {
+    // Set the muted flag internally in the class
+    func setMutedFlag(flag: Int) {
         if flag == 1 {
             self.isMuted = true
             
@@ -99,7 +109,8 @@ class MicHandler {
         self.isMuted = false
     }
     
-    func is_muted() {
+    // Update the mute status flag (check if th
+    func initMuteStatus() {
         if self.micSupported {
             var mutedStatus = 0
             var size = UInt32(MemoryLayout<UInt32>.size)
@@ -115,7 +126,7 @@ class MicHandler {
         self.isMuted = gainStatus < 0.001
     }
     
-    func get_muted_flag() -> Bool {
+    func getMutedFlag() -> Bool {
         return self.isMuted
     }
 }

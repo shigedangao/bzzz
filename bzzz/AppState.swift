@@ -16,7 +16,7 @@ final class AppState: ObservableObject {
     let micHandler = MicHandler()
     
     init() {
-        isMuted = micHandler.get_muted_flag()
+        isMuted = micHandler.getMutedFlag()
         
         KeyboardShortcuts.onKeyUp(for: .toggleMic) { [weak self] in
             Task { @MainActor in
@@ -26,14 +26,12 @@ final class AppState: ObservableObject {
     }
     
     func toggleMic() {
-        print("enter here")
         do {
-            try micHandler.toggle_muted()
-            isMuted = micHandler.get_muted_flag()
+            isMuted = try micHandler.toggleMuted()
         } catch {
             // set the michandler flag to 0 anyway
-            micHandler.set_muted_flag(flag: 0)
-            isMuted = micHandler.get_muted_flag()
+            micHandler.setMutedFlag(flag: 0)
+            isMuted = micHandler.getMutedFlag()
         }
     }
     
