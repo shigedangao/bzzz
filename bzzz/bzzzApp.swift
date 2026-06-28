@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct bzzzApp: App {
+    @StateObject private var appState = AppState()
+    
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        
+        MenuBarExtra(
+            "bzz",
+            systemImage: appState.isMuted ? "mic.slash.fill" : "microphone.circle.fill"
+        ) {
+            ContentView(appState: appState)
+                .frame(width: 200, height: 100)
+
         }
+        .menuBarExtraStyle(.window)
     }
 }
