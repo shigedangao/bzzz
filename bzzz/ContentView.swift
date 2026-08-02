@@ -27,7 +27,7 @@ struct ContentView: View {
                         appState.isMuted
                     },
                     set: { _ in
-                        appState.toggleMic()
+                        appState.toggleMic(isMuted: appState.isMuted)
                     }
                 )).toggleStyle(.switch)
             }
